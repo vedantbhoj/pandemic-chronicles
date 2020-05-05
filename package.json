@@ -1,0 +1,33 @@
+{
+  "name": "Pandemic-Chronicles",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "start http://localhost:3000 & node app.js",
+    "server": "nodemon app"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "~1.18.2",
+    "chart.js": "^2.9.3",
+    "chartkick": "^3.2.0",
+    "concurrently": "^5.1.0",
+    "config": "^3.3.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "3.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^6.4.0",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.6",
+    "request": "^2.88.2",
+    "serve-favicon": "~2.4.5",
+    "yarn": "^1.22.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0",
+    "nodemon": "^2.0.2"
+  }
+}
