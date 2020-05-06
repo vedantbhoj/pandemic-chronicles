@@ -24,21 +24,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public")); // using CSS and images from public directory
 app.use("/", index);
 
-app.use(function(req, res, next) {
-    var err = new Error("Not Found");
-    err.status = 404;
-    next(err);
-  });
-
   app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
-  
+    console.log(err.message);
+    console.log(res);
     // render the error page
     res.status(err.status || 500);
-    res.render("error", err.message);
+    res.render("error");
   });
+
+
+app.use("/healthOrganizations", require("./routes/healthOrganizations"));
+app.use("/pandemic", require("./routes/pandemic"));
+
   module.exports = app;
   
   app.listen(PORT, () => console.log("Server started "));
