@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 var Pandemic = require("../models/pandemic.js");
 
-
-
 module.exports.sars = function(req, res) {
   Pandemic.find({id:4}).exec(function(err, pandemic) {
     if (err) {
