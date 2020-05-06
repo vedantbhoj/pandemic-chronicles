@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var routeNames = require("../controller/healthOrganizations");
+var routeNames = require("../controller/organization");
 
 router.all("/who", routeNames.who);
 router.all("/cdc", routeNames.cdc);

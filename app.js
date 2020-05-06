@@ -36,7 +36,7 @@ app.use("/", index);
   });
 
 
-app.use("/healthOrganizations", require("./routes/healthOrganizations"));
+app.use("/organization", require("./routes/organization"));
 app.use("/pandemic", require("./routes/pandemic"));
 
   module.exports = app;
