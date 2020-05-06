@@ -5,7 +5,7 @@ id: Number,
 name: String,
 description: String,
 type: String,
-headquarters: String,
+Headquarters: String,
 budget: String,
 focus: Array,
 source: String

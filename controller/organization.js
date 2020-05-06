@@ -5,7 +5,7 @@ module.exports.who = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./organization", { organization: organization });
+      res.render("./test", {data: organization[0]});
     }
   });
 };
