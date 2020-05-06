@@ -7,5 +7,11 @@ var ctrlMain = require("../controller/main");
  */
 router.get("/", ctrlMain.get_index);
 
+
+/*
+ * GET DASH page.
+ */
+router.get("/dashboard", ctrlMain.get_dashboard);
+
 module.exports = router;
   

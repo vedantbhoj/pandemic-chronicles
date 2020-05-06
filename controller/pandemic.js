@@ -8,7 +8,7 @@ module.exports.sars = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./pandemic", { pandemic: pandemic , name: "Admin"});
+      res.render("./pandemic", { pandemic: pandemic });
     }
   });
 };
@@ -18,7 +18,7 @@ module.exports.ebola = function(req, res) {
       if (err) {
         console.log("Error:", err);
       } else {
-        res.render("./pandemic", { pandemic: pandemic , name: "Admin"});
+        res.render("./pandemic", { pandemic: pandemic });
       }
     });
 };
@@ -28,7 +28,7 @@ module.exports.mers = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./pandemic", { pandemic: pandemic , name: "Admin"});
+      res.render("./pandemic", { pandemic: pandemic });
     }
   });
 };
@@ -38,7 +38,7 @@ module.exports.h1n1 = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./pandemic", { pandemic: pandemic , name: "Admin"});
+      res.render("./pandemic", { pandemic: pandemic });
     }
   });
 };
@@ -48,7 +48,7 @@ module.exports.covid19 = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./pandemic", { pandemic: pandemic , name: "Admin"});
+      res.render("./pandemic", { pandemic: pandemic });
     }
   });};
 
