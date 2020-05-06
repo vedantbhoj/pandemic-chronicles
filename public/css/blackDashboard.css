@@ -1,8 +1,14 @@
+.number_render>h3{
+    font-size: medium;
+}
+
+.number_render>h2{
+    font-size: medium;
+}
 body {
     background-color: black;
     color: azure;
 }
-
 
 .flex-container {
     display: flex;
@@ -26,39 +32,18 @@ body {
 }
 
 .chart_render {
-    height: 280px;
+    height: 350px;
     width: 400px;
 }
+
+.number_render {
+    text-align: center;
+    height: 10px;
+    width: 150px;
+}
+
 
 .flex-container>div {
     text-align: center;
     margin-right: 30px;
 }
-
-.dash-title {
-    /* display: flex; */
-    text-align: center;
-    /* justify-content: center; */
-    width: 90%;
-    font-size: 30px;
-    padding: 2px;
-    border-bottom: 2px solid red;
-}
-
-.dash-title>span:first-child {
-    float: left;
-    border: 1px solid red;
-  }
-  .dash-title>span:nth-child(3) {
-    float: right;
-  }
-
-  .dash-title>span:first-child>a {
-    text-decoration: none;
-    color: white;
-  }
-
-  span>a{
-      text-decoration: none;
-      color: red;
-  }

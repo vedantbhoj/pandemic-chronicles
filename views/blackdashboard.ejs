@@ -1,352 +1,328 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" type="text/css" href="../css/blackDashboard.css">
 
-  <div class="main-container">
-        <div class="chartsDiv flex-container">
+<div class="main-container">
 
-            <div class="chart_card">
-                <h3>WORLD WIDE DATA</h3>
-                <div class="chart_render">
-                    <h3>Total Cases</h3>
-                    <h2 class="animate_number" id="TotalCases" style="color:yellow"></h2>
+    <div class="chartsDiv flex-container">
+        <div class="number_render">
+            <h3>Cases</h3>
+            <h2 class="animate_number" id="TotalCases" style="color:yellow"></h2>
+        </div>
+        <div class="number_render">
+            <h3>Deaths</h3>
+            <h2 class="animate_number" id="Totaldeaths" style="color:red"></h2>
+        </div>
+        <div class="number_render">
+            <h3>Recovered</h3>
+            <h2 class="animate_number" id="Totalrecovered" style="color:green"></h2>
+        </div>
 
-                    <h3>Total Deaths</h3>
-                    <h2 class="animate_number"  id="Totaldeaths"  style="color:red"></h2>
-
-                    <h3>Total Recovered</h3>
-                    <h2 class="animate_number"  id="Totalrecovered" style="color:green"></h2>
-
-                </div>
-            </div>
-
-            <div class="chart_card">
-                <h4>Cases on the World Map</h4>
-                <div id="geo" class="chart_render"></div>
-            </div>
-
-            <div class="chart_card">
-                <h4>Deaths per 1m population (Mortality)</h4>
-                <div id="mortality"></div>
-            </div>
-
-            <div class="chart_card">
-                <h4>US Total Cases: </h4>
-                <div id="US_DATA" class="chart_render"></div>
-            </div>
-
-            <div class="chart_card">
-                <h4>Top 5 Countries - Deaths with Recovered Cases</h4>
-                <div id="multiple-bar" class="chart_render"></div>
-            </div>
-
-            <div class="chart_card">
-                <h4>Top 5 Countries - Deaths with Critical Cases</h4>
-                <div id="stacked-bar" class="chart_render"></div>
-            </div>
-
+        <div class="number_render">
+            <h3>Critical</h3>
+            <h2 class="animate_number" id="TotalCritical" style="color:green"></h2>
+        </div>
+        <div class="number_render">
+            <h3>Tests</h3>
+            <h2 class="animate_number" id="TotalTests" style="color:green"></h2>
+        </div>
+        <div class="number_render">
+            <h3>Active</h3>
+            <h2 class="animate_number" id="TotalActive" style="color:green"></h2>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://unpkg.com/chartkick@3.2.0/dist/chartkick.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <div class="chartsDiv flex-container">
+        <div class="chart_card">
+            <h6>Deaths per 1m population (Mortality)</h6>
+            <div id="mortality"></div>
+        </div>
+
+        <div class="chart_card">
+            <h6>Top 5 - Deaths with Recovered Cases</h6>
+            <div id="multiple-bar" class="chart_render"></div>
+        </div>
+
+        <div class="chart_card">
+            <h6>Top 5 - Deaths with Critical Cases</h6>
+            <div id="stacked-bar" class="chart_render"></div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://unpkg.com/chartkick@3.2.0/dist/chartkick.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
 
-/*Corona API - Start*/
-var settings = {
-  "url": "../json/blackDashBoard.json",
-  "async": true,
-  "method": "GET",
-  "timeout": 0
-};
-
-$.ajax(settings).done(function (response) {
-    var covid = response.countries_stat;
-    var main = [];
-    var scatter_pop = [];
-    var scatter_deaths = [];
-    var scatter_countryName = [];
-    var scatterMortality = [];
-    var TotalCases = 0, Totaldeaths = 0, Totalrecovered = 0;
-    var US_Cases;
-    var US_Deaths;
-    var US_Recovered;
-    var US_Critical;
-    var US_Active;
-
-    function toNumber(data) {
-        if(data=="N/A") 
-            return 0;
-        else
-            return parseInt(data.replace(/,/g, ''), 10);
-    }
-
-    for (item in covid) {
-        if(covid[item].country_name !=="")
-        {
-        var jsonobject = [];
-
-        var cases = toNumber(covid[item].cases);
-        //cases = parseInt(cases.replace(/,/g, ''), 10);
-        TotalCases += cases;
-
-        var deaths = toNumber(covid[item].deaths);
-        //deaths = parseInt(deaths.replace(/,/g, ''), 10);
-        Totaldeaths += deaths;
-
-        var total_recovered = toNumber(covid[item].total_recovered);
-        //total_recovered = parseInt(total_recovered.replace(/,/g, ''), 10);
-        Totalrecovered += total_recovered;
-
-        var populationPerCountry = parseInt(cases / parseInt(covid[item].total_cases_per_1m_population.replace(/,/g, ''), 10));
-        scatter_pop.push(populationPerCountry * 1000000);
-        scatter_deaths.push(deaths);
-        scatter_countryName.push(covid[item].country_name);
-        
-        if(covid[item].country_name == "USA")
-            jsonobject.push("US", cases);
-        else
-            jsonobject.push(covid[item].country_name, cases);
-
-        main.push(jsonobject);
-        }
-    }
-
-    scatterMortality.push(scatter_pop, scatter_deaths, scatter_countryName);
-
-
-    var covid_US = covid.filter(function (item) {
-        return item.country_name == "USA";
-    })
-
-    var top5 = covid.sort(function (a, b) { return toNumber(a.deaths) < toNumber(b.deaths) ? 1 : -1; }).slice(0, 5);
-    var top5Recovered = [];
-    var top5Deaths = [];
-    var top5Critical = [];
-
-    for (item in top5) {
-        var jsonobject = [];
-        jsonobject.push(covid[item].country_name, toNumber(covid[item].total_recovered));
-        top5Recovered.push(jsonobject);
-        var jsonobject = [];
-        jsonobject.push(covid[item].country_name, toNumber(covid[item].deaths));
-        top5Deaths.push(jsonobject);
-        var jsonobject = [];
-        jsonobject.push(covid[item].country_name, toNumber(covid[item].serious_critical));
-        top5Critical.push(jsonobject);
-    }
-
-    US_Cases = toNumber(covid_US[0].cases);
-    US_Deaths = toNumber(covid_US[0].deaths);
-    US_Recovered = toNumber(covid_US[0].total_recovered);
-    US_Critical = toNumber(covid_US[0].serious_critical);
-    US_Active = toNumber(covid_US[0].active_cases);
-
-$("#TotalCases").html(TotalCases);
-$("#Totaldeaths").html(Totaldeaths);
-$("#Totalrecovered").html(Totalrecovered);
-
-/*Number Animation - Start*/
-$('.animate_number').each(function () {
-    $(this).prop('Counter', 0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 1500,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
-/*Number Animation - End*/
-
-
-/*Chart Kick Global options - Start*/
-Chartkick.options = {
-    library: { animation: { easing: 'easeOutQuart' } },
-    backgroundColor: 'black'
-}
-Chart.defaults.global.defaultFontColor = 'white';
-/*Chart Kick Global options - end*/
-
-
-/*Google Geo Chart - Start*/
-var options = { displayMode: 'text', backgroundColor: 'black' };
-var dataPoints = main;
-dataPoints.unshift(["Country", "Cases"]);
-google.charts.load('current', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(drawRegionsMap);
-
-function drawRegionsMap() {
-    var data = google.visualization.arrayToDataTable(dataPoints);
-
-    var options = {
-        backgroundColor: 'black',
-        colorAxis: {
-            colors: [
-                "#b30000",
-                "#800000",
-                "#660000",
-                "#4d0000",
-                "#1a0000"]
-        },
-        datalessRegionColor: '#ffffff',
+    /*Corona API - Start*/
+    var settings = {
+        "url": "../json/blackDashBoard.json",
+        "async": true,
+        "method": "GET",
+        "timeout": 0
     };
 
-    var chart = new google.visualization.GeoChart(document.getElementById('geo'));
-    chart.draw(data, options);
-};
-/*Google Geo Chart - End*/
+    $.ajax(settings).done(function (response) {
+        var covid = response.countries_stat;
+        var main = [];
+        var scatter_pop = [];
+        var scatter_deaths = [];
+        var scatter_countryName = [];
+        var scatterMortality = [];
+        var TotalCases = 0, Totaldeaths = 0, Totalrecovered = 0, Critical = 0, TotalTests = 0, TotalActive = 0; 
+        var US_Cases;
+        var US_Deaths;
+        var US_Recovered;
+        var US_Critical;
+        var US_Active;
 
-
-/*ChartJS PIE Chart - Start*/
-new Chartkick.PieChart("US_DATA", [["Deaths", US_Deaths], ["Critical", US_Critical], ["Recovered", US_Recovered]], { colors: ["red", "yellow", "green"] })
-/*ChartJS PIE Chart - End*/
-
-
-/*ChartJS BAR Chart - Start*/
-new Chartkick.BarChart("multiple-bar", [{ name: "Recovered", data: top5Recovered }, { name: "Deaths", data: top5Deaths }]);
-/*ChartJS BAR Chart - End*/
-
-
-/*Scatter Chart - Start*/
-var scatterData = scatterMortality;
-var trace1 = {
-    x: scatterData[0],
-    y: scatterData[1],
-    mode: 'markers',
-    type: 'scatter',
-    name: 'Mortality',
-    text: scatterData[2],
-    textposition: 'top center',
-    textfont: {
-        family: 'Raleway, sans-serif'
-    },
-    marker: {
-        size: 4,
-        color: 'rgb(255, 71, 26)'
-    }
-};
-var layout = {
-    autosize: false,
-    width: 400,
-    height: 280,
-    margin: {
-        l: 50,
-        r: 20,
-        b: 30,
-        t: 20,
-        pad: 2
-    },
-    plot_bgcolor: '#000',
-    paper_bgcolor: '#000',
-    xaxis: {
-        autorange: true,
-        type: 'log',
-        tickvals: [0, 1000000, 10000000, 10000000, 100000000, 1000000000],
-        color: 'white'
-    },
-    yaxis: {
-        autorange: true,
-        type: 'log',
-        tickvals: [0, 10, 100, 1000, 10000, 30000],
-        color: 'white'
-    },
-    scatter: { dash: '5000px 10000px' }
-};
-
-Plotly.newPlot('mortality', [trace1], layout).then(function () {
-    return Plotly.animate('mortality',
-        [{ data: [{ 'scatter': '' }] }],
-        {
-            frame: { duration: 1000, redraw: false },
-            transition: { duration: 1000 }
+        function toNumber(data) {
+            if (data == "N/A")
+                return 0;
+            else
+                return parseInt(data.replace(/,/g, ''), 10);
         }
-    );
-});
-/*Scatter Chart - End*/
 
-/*Stacked BAR Chart - Start*/
-var stackedXaxis = [];
-var stackedYaxis_deaths = [];
-var stackedYaxis_critical = [];
-for (i in top5Deaths) {
-    stackedXaxis.push(top5Deaths[i][0]);
-    stackedYaxis_deaths.push(top5Deaths[i][1]);
-}
-for (i in top5Critical) {
-    stackedYaxis_critical.push(top5Critical[i][1]);
-}
+        for (item in covid) {
+            if (covid[item].country_name !== "") {
+                var jsonobject = [];
 
-var trace1a = {
-    x: stackedXaxis,
-    y: stackedYaxis_deaths,
-    name: 'Deaths',
-    type: 'bar',
-    color: '#FFFF',
-    mode: 'markers',
-    name: '<span style="color:white">Deaths</span>',
-    text: "Deaths",
-    textposition: 'top center',
-    textfont: {
-        family: 'Raleway, sans-serif'
-    },
-    marker: {
-        size: 4,
-        color: 'rgb(128, 128, 128)',
-        line: {
-            color: 'rgb(255, 255, 255)',
-            width: 0.5
+                var cases = toNumber(covid[item].cases);
+                TotalCases += cases;
+
+                var deaths = toNumber(covid[item].deaths);
+                Totaldeaths += deaths;
+
+                var total_recovered = toNumber(covid[item].total_recovered);
+                Totalrecovered += total_recovered;
+
+                var total_critical = toNumber(covid[item].serious_critical);
+                Critical += total_critical;
+
+                var total_active = toNumber(covid[item].active_cases);
+                TotalActive += total_active;
+
+                var total_tests = toNumber(covid[item].total_tests);
+                TotalTests += total_tests;
+
+                var populationPerCountry = parseInt(cases / parseInt(covid[item].total_cases_per_1m_population.replace(/,/g, ''), 10));
+                scatter_pop.push(populationPerCountry * 1000000);
+                scatter_deaths.push(deaths);
+                scatter_countryName.push(covid[item].country_name);
+
+                if (covid[item].country_name == "USA")
+                    jsonobject.push("US", cases);
+                else
+                    jsonobject.push(covid[item].country_name, cases);
+
+                main.push(jsonobject);
+            }
         }
-    }
-};
 
-var trace1b = {
-    x: stackedXaxis,
-    y: stackedYaxis_critical,
-    type: 'bar',
-    color: '#FFFF',
-    mode: 'markers',
-    name: '<span style="color:white">Critical</span>',
-    text: "Critical",
-    textposition: 'top center',
-    textfont: {
-        family: 'Raleway, sans-serif'
-    },
-    marker: {
-        size: 4,
-        color: 'rgb(255, 71, 26)',
-        line: {
-            color: 'rgb(255, 255, 255)',
-            width: 0.5
+        scatterMortality.push(scatter_pop, scatter_deaths, scatter_countryName);
+
+
+        var covid_US = covid.filter(function (item) {
+            return item.country_name == "USA";
+        })
+
+        var top5 = covid.sort(function (a, b) { return toNumber(a.deaths) < toNumber(b.deaths) ? 1 : -1; }).slice(0, 5);
+        var top5Recovered = [];
+        var top5Deaths = [];
+        var top5Critical = [];
+
+        for (item in top5) {
+            var jsonobject = [];
+            jsonobject.push(covid[item].country_name, toNumber(covid[item].total_recovered));
+            top5Recovered.push(jsonobject);
+            var jsonobject = [];
+            jsonobject.push(covid[item].country_name, toNumber(covid[item].deaths));
+            top5Deaths.push(jsonobject);
+            var jsonobject = [];
+            jsonobject.push(covid[item].country_name, toNumber(covid[item].serious_critical));
+            top5Critical.push(jsonobject);
         }
-    }
-};
 
-var data = [trace1a, trace1b];
-var layout = {
-    barmode: 'stack', plot_bgcolor: "black", paper_bgcolor: "#000", color: '#FFFF', xaxis: { color: 'white' },
-    yaxis: { color: 'white' },
-};
+        US_Cases = toNumber(covid_US[0].cases);
+        US_Deaths = toNumber(covid_US[0].deaths);
+        US_Recovered = toNumber(covid_US[0].total_recovered);
+        US_Critical = toNumber(covid_US[0].serious_critical);
+        US_Active = toNumber(covid_US[0].active_cases);
 
-Plotly.newPlot('stacked-bar', data, layout).then(function () {
-    return Plotly.animate('stacked-bar',
-        [{ data: [{ 'line.dash': '0px 500px' }] }],
-        {
-            frame: { duration: 1000, redraw: true },
-            transition: { duration: 1000 }
+        $("#TotalCases").html(TotalCases);
+        $("#Totaldeaths").html(Totaldeaths);
+        $("#Totalrecovered").html(Totalrecovered);
+        $("#TotalTests").html(TotalTests);
+        $("#TotalActive").html(TotalActive);
+        $("#TotalCritical").html(Critical);
+
+        /*Number Animation - Start*/
+        $('.animate_number').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 1500,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+        /*Number Animation - End*/
+
+
+        /*Chart Kick Global options - Start*/
+        Chartkick.options = {
+            library: { animation: { easing: 'easeOutQuart' } },
+            backgroundColor: 'black'
         }
-    );
-});;
-/*Stacked BAR Chart - End*/
+        Chart.defaults.global.defaultFontColor = 'white';
+        /*Chart Kick Global options - end*/
 
-});
+        /*ChartJS BAR Chart - Start*/
+        new Chartkick.BarChart("multiple-bar", [{ name: "Recovered", data: top5Recovered }, { name: "Deaths", data: top5Deaths }]);
+        /*ChartJS BAR Chart - End*/
+
+
+        /*Scatter Chart - Start*/
+        var scatterData = scatterMortality;
+        var trace1 = {
+            x: scatterData[0],
+            y: scatterData[1],
+            mode: 'markers',
+            type: 'scatter',
+            name: 'Mortality',
+            text: scatterData[2],
+            textposition: 'top center',
+            textfont: {
+                family: 'Raleway, sans-serif'
+            },
+            marker: {
+                size: 4,
+                color: 'rgb(255, 71, 26)'
+            }
+        };
+        var layout = {
+            autosize: false,
+            width: 400,
+            height: 350,
+            margin: {
+                l: 50,
+                r: 20,
+                b: 30,
+                t: 20,
+                pad: 2
+            },
+            plot_bgcolor: '#000',
+            paper_bgcolor: '#000',
+            xaxis: {
+                autorange: true,
+                type: 'log',
+                tickvals: [0, 1000000, 10000000, 10000000, 100000000, 1000000000],
+                color: 'white'
+            },
+            yaxis: {
+                autorange: true,
+                type: 'log',
+                tickvals: [0, 10, 100, 1000, 10000, 30000],
+                color: 'white'
+            },
+            scatter: { dash: '5000px 10000px' }
+        };
+
+        Plotly.newPlot('mortality', [trace1], layout).then(function () {
+            return Plotly.animate('mortality',
+                [{ data: [{ 'scatter': '' }] }],
+                {
+                    frame: { duration: 1000, redraw: false },
+                    transition: { duration: 1000 }
+                }
+            );
+        });
+        /*Scatter Chart - End*/
+
+        /*Stacked BAR Chart - Start*/
+        var stackedXaxis = [];
+        var stackedYaxis_deaths = [];
+        var stackedYaxis_critical = [];
+        for (i in top5Deaths) {
+            stackedXaxis.push(top5Deaths[i][0]);
+            stackedYaxis_deaths.push(top5Deaths[i][1]);
+        }
+        for (i in top5Critical) {
+            stackedYaxis_critical.push(top5Critical[i][1]);
+        }
+
+        var trace1a = {
+            x: stackedXaxis,
+            y: stackedYaxis_deaths,
+            name: 'Deaths',
+            type: 'bar',
+            color: '#FFFF',
+            mode: 'markers',
+            name: '<span style="color:white">Deaths</span>',
+            text: "Deaths",
+            textposition: 'top center',
+            textfont: {
+                family: 'Raleway, sans-serif'
+            },
+            marker: {
+                size: 4,
+                color: 'rgb(128, 128, 128)',
+                line: {
+                    color: 'rgb(255, 255, 255)',
+                    width: 0.5
+                }
+            }
+        };
+
+        var trace1b = {
+            x: stackedXaxis,
+            y: stackedYaxis_critical,
+            type: 'bar',
+            color: '#FFFF',
+            mode: 'markers',
+            name: '<span style="color:white">Critical</span>',
+            text: "Critical",
+            textposition: 'top center',
+            textfont: {
+                family: 'Raleway, sans-serif'
+            },
+            marker: {
+                size: 4,
+                color: 'rgb(255, 71, 26)',
+                line: {
+                    color: 'rgb(255, 255, 255)',
+                    width: 0.5
+                }
+            }
+        };
+
+        var data = [trace1a, trace1b];
+        var layout = {
+            barmode: 'stack', plot_bgcolor: "black", paper_bgcolor: "#000", color: '#FFFF', xaxis: { color: 'white' },
+            autosize: false,
+            width: 400,
+            height: 350,
+            yaxis: { color: 'white' },
+        };
+
+        Plotly.newPlot('stacked-bar', data, layout).then(function () {
+            return Plotly.animate('stacked-bar',
+                [{ data: [{ 'line.dash': '0px 500px' }] }],
+                {
+                    frame: { duration: 1000, redraw: true },
+                    transition: { duration: 1000 }
+                }
+            );
+        });;
+        /*Stacked BAR Chart - End*/
+
+    });
 /*Corona API - End*/
 </script>
