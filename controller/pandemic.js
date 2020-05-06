@@ -8,7 +8,7 @@ module.exports.sars = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./pandemic", { data: pandemic[0] });
+      res.render("./pandemic", { pandemic: pandemic[0] });
     }
   });
 };
