@@ -3,33 +3,35 @@
 
 <div class="main-container">
 
-    <div class="chartsDiv flex-container">
+    <div class="flex-container">
         <div class="number_render">
             <h3>Cases</h3>
             <h2 class="animate_number" id="TotalCases" style="color:yellow"></h2>
         </div>
         <div class="number_render">
             <h3>Deaths</h3>
-            <h2 class="animate_number" id="Totaldeaths" style="color:red"></h2>
+            <h2 class="animate_number" id="Totaldeaths" style="color:gray"></h2>
         </div>
         <div class="number_render">
             <h3>Recovered</h3>
             <h2 class="animate_number" id="Totalrecovered" style="color:green"></h2>
         </div>
-
+    </div>
+    <div class="flex-container second-number-div">
         <div class="number_render">
             <h3>Critical</h3>
-            <h2 class="animate_number" id="TotalCritical" style="color:green"></h2>
+            <h2 class="animate_number" id="TotalCritical" style="color:red"></h2>
         </div>
         <div class="number_render">
             <h3>Tests</h3>
-            <h2 class="animate_number" id="TotalTests" style="color:green"></h2>
+            <h2 class="animate_number" id="TotalTests" style="color:skyblue"></h2>
         </div>
         <div class="number_render">
             <h3>Active</h3>
-            <h2 class="animate_number" id="TotalActive" style="color:green"></h2>
+            <h2 class="animate_number" id="TotalActive" style="color:orange"></h2>
         </div>
     </div>
+
 
     <div class="chartsDiv flex-container">
         <div class="chart_card">
@@ -74,7 +76,7 @@
         var scatter_deaths = [];
         var scatter_countryName = [];
         var scatterMortality = [];
-        var TotalCases = 0, Totaldeaths = 0, Totalrecovered = 0, Critical = 0, TotalTests = 0, TotalActive = 0; 
+        var TotalCases = 0, Totaldeaths = 0, Totalrecovered = 0, Critical = 0, TotalTests = 0, TotalActive = 0;
         var US_Cases;
         var US_Deaths;
         var US_Recovered;

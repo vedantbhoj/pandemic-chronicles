@@ -1,10 +1,16 @@
 .number_render>h3{
-    font-size: medium;
+    font-size: 23px;
 }
 
 .number_render>h2{
-    font-size: medium;
+    font-size: 40px;
 }
+
+.flex-container.second-number-div {
+    margin-top: -150px;
+    margin-bottom: 20px;
+}
+
 body {
     background-color: black;
     color: azure;
@@ -36,10 +42,14 @@ body {
     width: 400px;
 }
 
+.chartsDiv{
+margin-top: -150px;
+}
+
 .number_render {
     text-align: center;
     height: 10px;
-    width: 150px;
+    width: 400px;
 }
 
 
