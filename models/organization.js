@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-const PandemicSchema = new mongoose.Schema({
+const OrganizationSchema = new mongoose.Schema({
 id: Number,
 name: String,
 description: String,
@@ -18,4 +18,4 @@ data: Array,
 source: Array
 });
 
-module.exports = mongoose.model("pandemics", PandemicSchema);
+module.exports = mongoose.model("organization", OrganizationSchema);
