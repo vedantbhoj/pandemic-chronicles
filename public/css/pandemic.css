@@ -4,34 +4,35 @@
 }
 
 .pandemic-container {
-    width: 100%;
-    height: 100%;
-    padding: 20px 30px;
-    overflow: hidden;
-    background-size: cover;
-    background-color: black;
-    color: aliceblue;
-  }
-  
-  .border-div {
-    border: 1px solid white;
-    height: 100%;
-  }
+  width: 100%;
+  height: 100%;
+  padding: 20px 30px;
+  overflow: hidden;
+  background-size: cover;
+  background-color: aliceblue;
+  color: black;
+}
 
-  .section-left, .section-center {
-    border-right:  1px solid white;
-    height: 100%;
-  }
+.border-div {
+  /* border: 1px solid white; */
+  height: 100%;
+}
 
-  .center-row-top{
-    border-bottom:  1px solid white;
-    text-align: center;
-    height: 20%;
-    display: grid;
-    align-items: center;
-  }
+.section-left,
+.section-center {
+  /* border-right:  1px solid white; */
+  height: 100%;
+}
 
-  .center-row-bottom{
-    text-align: center;
-    height: 80%;
-  }
+.center-row-top {
+  /* border-bottom:  1px solid white; */
+  text-align: center;
+  height: 20%;
+  display: grid;
+  align-items: center;
+}
+
+.center-row-bottom {
+  text-align: center;
+  height: 80%;
+}
