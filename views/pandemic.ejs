@@ -1,7 +1,6 @@
 <%- include('./partials/header.ejs') %>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="https://unpkg.com/chartkick@3.2.0/dist/chartkick.js"></script>
-<!-- <%= pandemic %> -->
 <input id="pandemic" value="<%= data %>" hidden />
 
 <link rel="stylesheet" href="../css/pandemic.css" />
@@ -21,9 +20,8 @@
 
             <div class="row left-row-bottom left-bottom-2cards">
                 <div class="card text-white bg-dark mb-3 two-cards" >
-                    <div class="card-header" style="text-align: center;">Treatment</div>
+                    <div class="card-header" style="text-align: center;">Symptoms & Treatment</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Treatment</h5> -->
                         <p class="card-text">Symptoms: <%= pandemic.symptoms %> </p>
 
                         <p class="card-text">Treatment: <%= pandemic.treatment %> </p>
@@ -32,7 +30,6 @@
                 <div class="card text-white bg-dark mb-3 two-cards" style="float: right;">
                     <div class="card-header" style="text-align: center;">Complications</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Complications and Symptoms</h5> -->
                         <p class="card-text"><%= pandemic.complications %> </p>
 
                     </div>
@@ -55,7 +52,6 @@
                 <div class="card text-white bg-dark mb-3 right-two-cards" >
                     <div class="card-header" style="text-align: center;">Statistics</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Statistics</h5> -->
                         <p class="card-text " style="font-size: 14px;" >Deaths:<b>  <%= pandemic.death_toll %> </b></p>
                         <p class="card-text " style="font-size: 14px;" >Confirmed Cases: <b> <%= pandemic.confirmed_cases %></b> </p>
                         <p class="card-text "  style="font-size: 14px;">Recovered Cases:<b> <%= pandemic.recovered_cases %></b></p>
@@ -64,9 +60,8 @@
                 <div class="card text-white bg-dark mb-3 right-two-cards " style="float: right;">
                     <div class="card-header" style="text-align: center;">Impact</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Impact</h5> -->
                         <p class="card-text" style="font-size: 14px;">Time Period: <b>  <%= pandemic.time_period %> </b> </p> 
-                        <p class="card-text" style="font-size: 14px;">Countried Affected: <b>  <%= pandemic.countries_affected %></b>  </p>
+                        <p class="card-text" style="font-size: 14px;">Countries Affected: <b>  <%= pandemic.countries_affected %></b>  </p>
 
                     </div>
                 </div>
@@ -76,14 +71,12 @@
                 <div class="card text-white bg-dark mb-3 right-two-cards " >
                     <div class="card-header" style="text-align: center;">Prevention</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Statistics</h5> -->
                         <p class="card-text "> <%= pandemic.prevention %> </p>
                     </div>
                 </div>
                 <div class="card text-white bg-dark mb-3 right-two-cards  " style="float: right;">
                     <div class="card-header" style="text-align: center;">Specialty</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Impact</h5> -->
                         <p class="card-text "><h5 style="color: black;"> <%= pandemic.specialty %> </h5></p> 
 
                     </div>
@@ -94,14 +87,12 @@
                 <div class="card text-white bg-dark mb-3 right-two-cards" >
                     <div class="card-header" style="text-align: center;">Pre Human Host</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Pre Human Host</h5> -->
                         <p class="card-text " ><h5 style="color: black;"> <%= pandemic.pre_human_host%> </h5></p>
                     </div>
                 </div>
                 <div class="card text-white bg-dark mb-3 right-two-cards" style="float: right;">
                     <div class="card-header" style="text-align: center;">Origin</div>
                     <div class="card-body text-info">
-                        <!-- <h5 class="card-title">Origin</h5> -->
                         <p class="card-text "><h6 style="color: black;"> <%= pandemic.origin %></h6> </p>
                     </div>
                 </div>
