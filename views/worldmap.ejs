@@ -4,11 +4,12 @@
   #worldChartdiv {
     width: 100%;
     height: 100%;
+    margin-top: 30px;
   }
   .worldMapContainer{
     display: inline-block;
     width: 100%;
-    height: 100%;
+    height: 90%;
     overflow: hidden;
     background-size: cover;
     color: black;
@@ -45,8 +46,8 @@
     var worldchart = am4core.create("worldChartdiv", am4maps.MapChart);
 
     var title = worldchart.titles.create();
-    //title.text = "[bold font-size: 20]Population of the World in 2011[/]\nsource: Gapminder";
-    //title.textAlign = "middle";
+    title.text = "[bold font-size: 20]Current Cases Around The World[/]\nSource: PostMan API";
+    title.textAlign = "middle";
 
     var covid = response;
         var map=[];

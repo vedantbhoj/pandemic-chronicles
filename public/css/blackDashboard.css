@@ -6,8 +6,12 @@
     font-size: 40px;
 }
 
+h6{
+    font-size: 20px;
+}
+
 .flex-container.second-number-div {
-    margin-top: -5%;
+    /* margin-top: -5%; */
     margin-bottom: 20px;
 }
 
@@ -26,8 +30,8 @@ body {
 
 .main-container {
     width: 100%;
-    height: 100%;
-    padding: 20px 30px;
+    height: 90%;
+    /* padding: 20px 30px; */
     overflow: hidden;
     background-size: cover;
     display: flex;
@@ -38,12 +42,12 @@ body {
 }
 
 .chart_render {
-    height: 350px;
+    height: 300px;
     width: 400px;
 }
 
 .chartsDiv{
-margin-top: -5%;
+/* margin-top: -5%; */
 }
 
 .number_render {
