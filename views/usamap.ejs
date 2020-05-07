@@ -32,6 +32,13 @@
 <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
+<script>
+    if ($('.nav-item').hasClass('active')) {
+      $('.nav-item').removeClass('active');
+      $('#dashboardNav').addClass('active');
+    }
+  </script>
+
 <!-- Chart code -->
 <script>
     $("#btn-usa").addClass('active');
@@ -98,6 +105,7 @@
             casesSeries.interpolationDuration = 1000;
             casesSeries.columns.template.tooltipText = "Cases: {valueX} ({valueX.percent.formatNumber('#.0')}%)";
             //casesSeries.sequencedInterpolation = true;
+            casesSeries.fill = casesChart.colors.getIndex(4);
 
 
             var deathsChart = mainContainer.createChild(am4charts.XYChart);
@@ -124,7 +132,7 @@
             deathsSeries.dataFields.valueX = "deaths";
             deathsSeries.dataFields.valueXShow = "percent";
             deathsSeries.calculatePercent = true;
-            deathsSeries.fill = deathsChart.colors.getIndex(4);
+            deathsSeries.fill = deathsChart.colors.getIndex(0);
             deathsSeries.stroke = deathsSeries.fill;
             //deathsSeries.sequencedInterpolation = true;
             deathsSeries.columns.template.tooltipText = "Deaths: {valueX} ({valueX.percent.formatNumber('#.0')}%)";

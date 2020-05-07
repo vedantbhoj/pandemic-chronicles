@@ -1,5 +1,11 @@
 <%- include('./partials/header.ejs') %>
 <%- include('./partials/header_dashboard.ejs') %>
+<script>
+    if ($('.nav-item').hasClass('active')) {
+      $('.nav-item').removeClass('active');
+      $('#dashboardNav').addClass('active');
+    }
+  </script>
 <link rel="stylesheet" type="text/css" href="../css/blackDashboard.css">
 
 <h4 style="text-align: center; padding-top: 10px; margin-bottom: -10px;">COVID-19 Overview Of The World</h4>

@@ -26,6 +26,13 @@
 <div id="chartdiv"></div>
 </div>
 
+<script>
+  if ($('.nav-item').hasClass('active')) {
+    $('.nav-item').removeClass('active');
+    $('#dashboardNav').addClass('active');
+  }
+</script>
+
 <!-- Resources -->
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"
     integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
@@ -378,7 +385,6 @@ yAxis.renderer.labels.template.fontSize = 10;
 yAxis.renderer.minGridDistance = 10;
 
 var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
-
 // Create series
 var series = chart.series.push(new am4charts.ColumnSeries());
 series.dataFields.valueX = "deaths";
