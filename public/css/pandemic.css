@@ -41,7 +41,7 @@
 .left-row-top {
   /* border-bottom:  1px solid white; */
   text-align: center;
-  height: 40%;
+  /* height: 40%; */
   display: grid;
   align-items: center;
 }
@@ -75,8 +75,12 @@
 }
 
 .card-text{
-  color: white;
-  font-size: 12px;
+  color: black;
+  font-size: 14px;
+}
+
+.card-body{
+  background-color: #ced8e1;
 }
 
 .card-header
@@ -86,13 +90,29 @@
 }
 
 .left-bottom-2cards{
+  text-align: center;
   display:inline-flex;
+  align-items: center;
 }
 
 .two-cards{
+  max-width: 50%;
+  width: 230px;
+  max-height: 25rem;
+  margin-right: 10px;
+  height: 350px;
+}
+
+.right-two-cards {
   max-width: 47%;
   width: 230px;
   max-height: 25rem;
   margin-right: 10px;
+  height: 206px;
 }
 
+.about-card{
+  max-height: 30rem;
+  margin-right: 10px;
+  height: 270px;
+}
