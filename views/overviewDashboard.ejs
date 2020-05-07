@@ -1,4 +1,5 @@
 <%- include('./partials/header.ejs') %>
+<%- include('./partials/header_dashboard.ejs') %>
 <link rel="stylesheet" type="text/css" href="../css/blackDashboard.css">
 
 <div class="main-container">
@@ -6,7 +7,7 @@
     <div class="flex-container">
         <div class="number_render">
             <h3>Cases</h3>
-            <h2 class="animate_number" id="TotalCases" style="color:yellow"></h2>
+            <h2 class="animate_number" id="TotalCases" style="color:blue"></h2>
         </div>
         <div class="number_render">
             <h3>Deaths</h3>
@@ -20,7 +21,7 @@
     <div class="flex-container second-number-div">
         <div class="number_render">
             <h3>Critical</h3>
-            <h2 class="animate_number" id="TotalCritical" style="color:red"></h2>
+            <h2 class="animate_number" id="TotalCritical" style="color:#ff5b5beb"></h2>
         </div>
         <div class="number_render">
             <h3>Tests</h3>
@@ -60,7 +61,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
-
+$("#btn-overview").addClass('active');
     /*Corona API - Start*/
     var settings = {
         "url": "../json/blackDashBoard.json",
@@ -181,13 +182,14 @@
         /*Chart Kick Global options - Start*/
         Chartkick.options = {
             library: { animation: { easing: 'easeOutQuart' } },
-            backgroundColor: 'black'
+            backgroundColor: 'white',
+
         }
-        Chart.defaults.global.defaultFontColor = 'white';
+        Chart.defaults.global.defaultFontColor = 'black';
         /*Chart Kick Global options - end*/
 
         /*ChartJS BAR Chart - Start*/
-        new Chartkick.BarChart("multiple-bar", [{ name: "Recovered", data: top5Recovered }, { name: "Deaths", data: top5Deaths }]);
+        new Chartkick.BarChart("multiple-bar", [{ name: "Recovered", data: top5Recovered }, { name: "Deaths", data: top5Deaths }],{colors: [ "rgb(34,139,34)","grey"]});
         /*ChartJS BAR Chart - End*/
 
 
@@ -220,19 +222,19 @@
                 t: 20,
                 pad: 2
             },
-            plot_bgcolor: '#000',
-            paper_bgcolor: '#000',
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
             xaxis: {
                 autorange: true,
                 type: 'log',
                 tickvals: [0, 1000000, 10000000, 10000000, 100000000, 1000000000],
-                color: 'white'
+                color: 'black'
             },
             yaxis: {
                 autorange: true,
                 type: 'log',
                 tickvals: [0, 10, 100, 1000, 10000, 30000],
-                color: 'white'
+                color: 'black'
             },
             scatter: { dash: '5000px 10000px' }
         };
@@ -267,7 +269,7 @@
             type: 'bar',
             color: '#FFFF',
             mode: 'markers',
-            name: '<span style="color:white">Deaths</span>',
+            name: '<span style="color:black">Deaths</span>',
             text: "Deaths",
             textposition: 'top center',
             textfont: {
@@ -277,7 +279,7 @@
                 size: 4,
                 color: 'rgb(128, 128, 128)',
                 line: {
-                    color: 'rgb(255, 255, 255)',
+                    color: 'rgb(0, 0, 0)',
                     width: 0.5
                 }
             }
@@ -289,7 +291,7 @@
             type: 'bar',
             color: '#FFFF',
             mode: 'markers',
-            name: '<span style="color:white">Critical</span>',
+            name: '<span style="color:black">Critical</span>',
             text: "Critical",
             textposition: 'top center',
             textfont: {
@@ -299,7 +301,7 @@
                 size: 4,
                 color: 'rgb(255, 71, 26)',
                 line: {
-                    color: 'rgb(255, 255, 255)',
+                    color: 'rgb(0, 0, 0)',
                     width: 0.5
                 }
             }
@@ -307,11 +309,18 @@
 
         var data = [trace1a, trace1b];
         var layout = {
-            barmode: 'stack', plot_bgcolor: "black", paper_bgcolor: "#000", color: '#FFFF', xaxis: { color: 'white' },
+            barmode: 'stack', plot_bgcolor: "white", paper_bgcolor: "white", color: '#FFFF', xaxis: { color: 'black' },
             autosize: false,
             width: 400,
             height: 350,
-            yaxis: { color: 'white' },
+            margin: {
+                l: 50,
+                r: 20,
+                b: 30,
+                t: 20,
+                pad: 2
+            },
+            yaxis: { color: 'black' },
         };
 
         Plotly.newPlot('stacked-bar', data, layout).then(function () {

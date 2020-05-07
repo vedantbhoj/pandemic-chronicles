@@ -38,6 +38,7 @@ app.use("/", index);
 
 app.use("/organization", require("./routes/organization"));
 app.use("/pandemic", require("./routes/pandemic"));
+app.use("/dashboard", require("./routes/dashboard"));
 
   module.exports = app;
   

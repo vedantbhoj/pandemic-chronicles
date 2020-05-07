@@ -1,20 +1,16 @@
+<%- include('./partials/header_dashboard.ejs') %>
 <!-- Styles -->
 <style>
   #worldChartdiv {
-    width: 70%;
-    height: 600px;
+    width: 100%;
+    height: 100%;
   }
   .worldMapContainer{
     display: inline-block;
-    text-align: center;
     width: 100%;
     height: 100%;
-    padding: 20px 30px;
     overflow: hidden;
     background-size: cover;
-    display: flex;
-  align-items: center;
-  justify-content: center;
     color: black;
 }
 </style>
@@ -29,6 +25,7 @@
 
 <!-- Chart code -->
 <script>
+  $("#btn-world").addClass('active');
   var settings = {
         "url": "https://corona.lmao.ninja/v2/countries",
         "async": true,
@@ -59,7 +56,7 @@
                   {"id":covid[item].countryInfo.iso2, 
                   "name":covid[item].country, 
                   "value":covid[item].cases, 
-                  "color": worldchart.colors.getIndex(0)};
+                  "color": worldchart.colors.getIndex(1)};
             map.push(jsonobject);
           }
           //console.log(map);
