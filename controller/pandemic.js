@@ -51,3 +51,6 @@ module.exports.covid19 = function(req, res) {
   });};
 
 
+  module.exports.api = function(req, res) {
+    res.render("./api");
+  };
