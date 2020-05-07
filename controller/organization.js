@@ -5,7 +5,7 @@ module.exports.who = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./test", {data: organization[0]});
+      res.render("./organization", {data: organization[0]});
     }
   });
 };
@@ -15,7 +15,7 @@ module.exports.cdc = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./organization", { organization: organization });
+      res.render("./organization", {data: organization[0]});
     }
   });
 };
@@ -25,7 +25,7 @@ module.exports.unicef = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./organization", { organization: organization });
+      res.render("./organization", {data: organization[0]});
     }
   });
 };
@@ -35,7 +35,7 @@ module.exports.worldbank = function(req, res) {
     if (err) {
       console.log("Error:", err);
     } else {
-      res.render("./organization", { organization: organization });
+      res.render("./organization", {data: organization[0]});
     }
   });
 };
