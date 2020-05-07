@@ -12,6 +12,13 @@
   background-color: aliceblue;
   color: black;
 }
+
+.org-table{
+    font-size: 17px;
+    width:80%;
+    margin-left: 10%;
+}
+
 </style>
 <link rel="stylesheet" href="../css/pandemic.css">
 <div class="organization-container">
@@ -27,8 +34,8 @@
     </div>
 
 
-    <table class="table table-bordered">
-        <tbody>
+    <table class="table table-striped org-table">
+        <tbody class="thead-dark">
             <tr>
                 <th>Focus</th>
                 <td><%=data.focus%></td>
