@@ -6,58 +6,138 @@
 
 <link rel="stylesheet" href="../css/pandemic.css" />
 <div class="pandemic-container">
-  <div class="row border-div">
-    <div class="col-md-4 section-left">
-      <div class="card border-info mb-3" style="max-width: 18rem;">
-        <div class="card-header">About</div>
-        <div class="card-body text-info">
-          <h5 class="card-title">Info card title</h5>
-          <p class="card-text">Arpit <%=data.description%></p>
+    <div class="row border-div">
+
+        <div class="col-md-4 section-left">
+
+            <div class="row left-row-top">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header" style="text-align: center;">About</div>
+                    <div class="card-body text-info">
+                        <p class="card-text" style="color: white;"><%=pandemic.description%> </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row left-row-bottom left-bottom-2cards">
+                <div class="card text-white bg-dark mb-3 two-cards" >
+                    <div class="card-header" style="text-align: center;">Symptoms and Treatment</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Treatment</h5> -->
+                        <p class="card-text" style="color: white;">Symptoms: <%= pandemic.symptoms %> </p>
+
+                        <p class="card-text" style="color: white;">Treatment: <%= pandemic.treatment %> </p>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3 two-cards" style="float: right;">
+                    <div class="card-header" style="text-align: center;">Complications</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Complications and Symptoms</h5> -->
+                        <p class="card-text"><%= pandemic.complications %> </p>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </div>
-      <p><%= pandemic.treatment %></p>
+        <div class="col-md-4 section-center">
+            <div class="row center-row-top">
+                <h1><%= pandemic.name %></h1>
+            </div>
+            <div class="row center-row-bottom">
+                <div id="pandemic-chart" class="chart_render"></div>
+            </div>
+        </div>
+        <div class="col-md-4 section-right">
+            <div class="row left-row-top left-bottom-2cards">
+                <div class="card text-white bg-dark mb-3 two-cards " >
+                    <div class="card-header" style="text-align: center;">Statistics</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Statistics</h5> -->
+                        <p class="card-text " style="color: white;">Deaths: <%= pandemic.death_toll %> </p>
+                        <p class="card-text " style="color: white;">Confirmed Cases: <%= pandemic.confirmed_cases %> </p>
+                        <p class="card-text " style="color: white;">Recovered Cases: <%= pandemic.recovered_cases %> </p>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3 two-cards " style="float: right;">
+                    <div class="card-header" style="text-align: center;">Impact</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Impact</h5> -->
+                        <p class="card-text ">Time Period: <%= pandemic.time_period %> </p> 
+                        <p class="card-text ">Countried Affected: <%= pandemic.countries_affected %> </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row left-row-middle left-bottom-2cards">
+                <div class="card text-white bg-dark mb-3 two-cards " >
+                    <div class="card-header" style="text-align: center;">Prevention</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Statistics</h5> -->
+                        <p class="card-text " style="color: white;"> <%= pandemic.prevention %> </p>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3 two-cards  " style="float: right;">
+                    <div class="card-header" style="text-align: center;">Specialty</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Impact</h5> -->
+                        <p class="card-text "><%= pandemic.specialty %> </p> 
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row right-row-bottom ">
+                <div class="card text-white bg-dark mb-3 two-cards" >
+                    <div class="card-header" style="text-align: center;">Pre Human Host</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Pre Human Host</h5> -->
+                        <p class="card-text " style="color: white; "><%= pandemic.pre_human_host%> </p>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3 two-cards" style="float: right;">
+                    <div class="card-header" style="text-align: center;">Origin</div>
+                    <div class="card-body text-info">
+                        <!-- <h5 class="card-title">Origin</h5> -->
+                        <p class="card-text "><%= pandemic.origin %> </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="col-md-4 section-center">
-      <div class="row center-row-top">
-        <h1><%= pandemic.name %></h1>
-      </div>
-      <div class="row center-row-bottom">
-        <div id="pandemic-chart" class="chart_render"></div>
-      </div>
-    </div>
-    <div class="col-md-4 section-right"></div>
-  </div>
 </div>
 
 <script>
-  if ($(".nav-item").hasClass("active")) {
-    $(".nav-item").removeClass("active");
-    $("#pandemics_dropdown").addClass("active");
-  }
+    if ($(".nav-item").hasClass("active")) {
+        $(".nav-item").removeClass("active");
+        $("#pandemics_dropdown").addClass("active");
+    }
 
-  var pandemic = JSON.parse($("#pandemic").val());
-  console.log(pandemic);
+    var pandemic = JSON.parse($("#pandemic").val());
+    console.log(pandemic);
 
-  var cases = [];
-  var deaths = [];
-  var tolldata = pandemic;
-  for (item in tolldata) {
-    var jsonobject = [];
-    jsonobject.push(tolldata[item].country, tolldata[item].cases);
-    cases.push(jsonobject);
-    var jsonobject = [];
-    jsonobject.push(tolldata[item].country, tolldata[item].deaths);
-    deaths.push(jsonobject);
-  }
+    var cases = [];
+    var deaths = [];
+    var tolldata = pandemic;
+    for (item in tolldata) {
+        var jsonobject = [];
+        jsonobject.push(tolldata[item].country, tolldata[item].cases);
+        cases.push(jsonobject);
+        var jsonobject = [];
+        jsonobject.push(tolldata[item].country, tolldata[item].deaths);
+        deaths.push(jsonobject);
+    }
 
-  Chartkick.options = {
-    library: { animation: { easing: "easeOutQuart" } },
-  };
+    Chartkick.options = {
+        library: { animation: { easing: "easeOutQuart" } },
+    };
 
-  new Chartkick.BarChart("pandemic-chart", [
-    { name: "Cases", data: cases },
-    { name: "Deaths", data: deaths },
-  ]);
+    new Chartkick.BarChart("pandemic-chart", [
+        { name: "Cases", data: cases },
+        { name: "Deaths", data: deaths },
+    ]);
 
   // var ctx = document.getElementById('pandemic-chart').getContext('2d');
   // var myChart = new Chart(ctx, {
