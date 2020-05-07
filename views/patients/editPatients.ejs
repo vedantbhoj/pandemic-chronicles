@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Data Entry</title>
+    <%- include('../partials/header.ejs') %>
+    <link rel="stylesheet" src="style.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/protectedhome">Disasters</a>
+      <a href="/faq">FAQ's</a>
+      <a href="/explore">Explore</a>
+      <a href="/resources">Resources</a>
+      <a class="active" href="/patients">Covid19</a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+    <div class="container">
+      <h3><a href="/patients">Covid 19 Till Date</a></h3>
+      <h1>Edit Data</h1>
+      <form action="/patients/update/<%= patient._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>ObservationDate</td>
+              <td>
+                <input
+                  type="Date"
+                  name="ObservationDate"
+                  required=""
+                  value="<%= patient.ObservationDate %>"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Province</td>
+              <td>
+                <textarea name="Province"><%= patient.Province %></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>
+                <input
+                  type="text"
+                  name="Country"
+                  required=""
+                  value="<%= patient.Country %>"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Confirmed</td>
+              <td>
+                <input
+                  type="number"
+                  name="Confirmed"
+                  required=""
+                  value="<%= patient.Confirmed %>"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Deaths</td>
+              <td>
+                <input
+                  type="number"
+                  name="Deaths"
+                  required=""
+                  value="<%= patient.Deaths %>"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Recovered</td>
+              <td>
+                <input
+                  type="number"
+                  name="Recovered"
+                  required=""
+                  value="<%= patient.Recovered %>"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

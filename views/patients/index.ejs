@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patients Data</title>
+    <%- include('../partials/header.ejs') %>
+
+    <link rel="stylesheet" src="style.css" />
+  </head>
+
+  <%
+  getFormattedDate = function(date) {
+    const event = new Date(date);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return event.toLocaleDateString('en-US', options);
+}
+%>
+<script>
+//   $(function(){
+//   localStorage.clear();
+//   $('input,select,textarea').persist();
+// });
+function resetSearch(){
+  //localStorage.clear();
+  window.location.href = '/patients';
+}
+</script>
+  <body>
+    <div class="topnav">
+      <a href="/protectedhome">Disasters</a>
+      <a href="/faq">FAQ's</a>
+      <a href="/explore">Explore</a>
+      <a href="/resources">Resources</a>
+      <a class="active" href="/patients">Covid19</a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+    <div class="container">
+      
+      <h3><a href="/patients/create">Add Data for New Day</a> </h3>
+        <span>Showing the Covid19 cases worldwide:</span>
+      <div class="filter_div">
+        <form name="searchForm" action="/patients/search" method="POST">
+        <span> Search by Province: </span>
+        &nbsp; &nbsp;
+        <input type="text" required="" id="search_province" name="province" placeholder="Enter Province Name" style="width:200px; height:20px">
+        &nbsp; &nbsp;
+        <button class="covid-search" style="padding: 0px;" type="submit" value="Search">Search</button>
+        &nbsp; &nbsp;
+        <button class="covid-search" style="padding: 0px;" onclick="resetSearch()" value="Reset">Reset</button>
+      </form>
+      </div>
+      <div class="covid-table-div">
+      <% if(patient != null && patient.length>0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Province</th>
+            <th>Country</th>
+            <th>Confirmed</th>
+            <th>Deaths</th>
+            <th>Recovered</th>
+            <th>Observation Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<patient.length;i++) { %>
+            <tr>
+             
+              <td><a href="/patients/show/<%= patient[i]._id%>"><%= patient[i].Province%></a></td>
+              <td><%= patient[i].Country%></td>
+              <td><%= patient[i].Confirmed%></td>
+              <td><%= patient[i].Deaths%></td>
+              <td><%= patient[i].Recovered%></td>
+              <td><%= getFormattedDate(patient[i].ObservationDate)%></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No patient found.</div>
+      <% } %>
+    </div>
+  </div>
+  </body>
+</html>

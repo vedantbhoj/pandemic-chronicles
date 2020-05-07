@@ -12,6 +12,7 @@ mongoose
   .catch(err => console.error(err));
 
 var index = require("./routes/index");
+
 const PORT = 3000;
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/", index);
 app.use("/organization", require("./routes/organization"));
 app.use("/pandemic", require("./routes/pandemic"));
 app.use("/dashboard", require("./routes/dashboard"));
+app.use("/patients", require("./routes/patients"));
 
   module.exports = app;
   
