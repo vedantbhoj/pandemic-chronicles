@@ -1,3 +1,3 @@
 # pandemic-chronicles
-# Repo - https://github.com/vedantbhoj/pandemic-chronicles/
-# Deployed - http://52.8.207.6/
+Repo - https://github.com/vedantbhoj/pandemic-chronicles/ <br>
+Deployed - http://52.8.207.6/
