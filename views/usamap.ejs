@@ -68,7 +68,7 @@
             for (var i = 0; i < res.length; i += 5) {
                 var obj = {};
                 var formattedDate = moment(res[i].date, "YYYYMMDD");
-                obj['date'] =  formattedDate.format("DD MMM YY");
+                obj['date'] =  formattedDate.format("DD MMM,YY");
                 obj['cases'] = res[i].positive;
                 obj['deaths'] = res[i].death;
                 arr.push(obj);
@@ -86,12 +86,13 @@
             casesCategoryAxis.renderer.grid.template.location = 0;
             //casesCategoryAxis.renderer.inversed = true;
             casesCategoryAxis.renderer.minGridDistance = 15;
+            casesCategoryAxis.fontSize = 12;
 
             var casesValueAxis = casesChart.xAxes.push(new am4charts.ValueAxis());
             casesValueAxis.renderer.inversed = true;
             casesValueAxis.min = 0;
             casesValueAxis.max = 30;
-            casesValueAxis.strictMinMax = true;
+            casesValueAxis.strictMinMax = false;
 
             casesValueAxis.numberFormatter = new am4core.NumberFormatter();
             casesValueAxis.numberFormatter.numberFormat = "#.#'%'";
@@ -107,6 +108,14 @@
             //casesSeries.sequencedInterpolation = true;
             casesSeries.fill = casesChart.colors.getIndex(4);
 
+            var casesLabel = casesSeries.bullets.push(new am4charts.LabelBullet());
+            casesLabel.label.text = "{cases}";
+            casesLabel.label.fontSize = 10;
+            casesLabel.label.horizontalCenter = "left";
+            casesLabel.label.hideOversized = true;
+            casesLabel.label.dx = 10;
+            casesLabel.label.fill = am4core.color("#fff");
+
 
             var deathsChart = mainContainer.createChild(am4charts.XYChart);
             deathsChart.paddingLeft = 0;
@@ -118,11 +127,12 @@
             deathsCategoryAxis.dataFields.category = "date";
             deathsCategoryAxis.renderer.grid.template.location = 0;
             deathsCategoryAxis.renderer.minGridDistance = 15;
+            deathsCategoryAxis.fontSize = 12;
 
             var deathsValueAxis = deathsChart.xAxes.push(new am4charts.ValueAxis());
             deathsValueAxis.min = 0;
             deathsValueAxis.max = 30;
-            deathsValueAxis.strictMinMax = true;
+            deathsValueAxis.strictMinMax = false;
             deathsValueAxis.numberFormatter = new am4core.NumberFormatter();
             deathsValueAxis.numberFormatter.numberFormat = "#.#'%'";
             deathsValueAxis.renderer.minLabelPosition = 0.01;
@@ -139,6 +149,14 @@
             deathsSeries.dataFields.categoryY = "date";
             deathsSeries.interpolationDuration = 1000;
 
+            var deathsLabel = deathsSeries.bullets.push(new am4charts.LabelBullet());
+            deathsLabel.label.text = "{deaths}";
+            deathsLabel.label.fontSize = 10;
+            deathsLabel.label.hideOversized = true;
+            deathsLabel.label.truncate = true;
+            deathsLabel.label.horizontalCenter = "right";
+            deathsLabel.label.dx = -10;
+            deathsLabel.label.fill = am4core.color("#fff");
 
             var mapChart = mainContainer.createChild(am4maps.MapChart);
             mapChart.projection = new am4maps.projections.Mercator();
@@ -197,7 +215,7 @@
                     selectedStateId = id;
                     selectedPolygon = polygon;
 
-                    label.text = stateName + " COVID 19 Impact";
+                    label.text = stateName + " - COVID 19 Impact";
                     label.hide(0);
                     label.show();
                 }
@@ -209,7 +227,7 @@
             label.horizontalCenter = "middle";
             label.y = 50;
             label.showOnInit = true;
-            label.text = "US COVID 19 Pyramid";
+            label.text = "US COVID 19 Pyramid[/]\nsource: covidtracking.com/api/states/";
             label.hiddenState.properties.dy = -100;
 
             var settings = {
@@ -227,7 +245,7 @@
                     obj = {};
                     var arr = [];
                     var formattedDate = moment(res[i].date, "YYYYMMDD");
-                    obj['date'] =  formattedDate.format("DD MMM YY");
+                    obj['date'] =  formattedDate.format("DD MMM,YY");
                     obj['cases'] = res[i].positive;
                     obj['deaths'] = res[i].death;
                     arr.push(obj);
@@ -246,7 +264,7 @@
 </script>
 
 <!-- HTML -->
-<h4 style="text-align: center; padding-top: 10px;">USA States - Visualization of COVID 19 Impact (Cases v/s Deaths)</h4>
+<h4 style="text-align: center; padding-top: 10px;">USA States - Visualization of COVID 19 Impact (Cases v/s Deaths)<br><span style="font-size: 12px; color: gray;">Source: https://covidtracking.com/api/us/</span></h4>
 <div class="worldMapContainer">
     <div id="chartdiv"></div>
 </div>
